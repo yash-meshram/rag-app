@@ -1,11 +1,15 @@
 from PIL import Image
 import io
 import base64
-from models.llm import get_gemini
-from logger_config import get_logger
+from app.rag.models.llm import get_model
+from app.logger_config import get_logger
+from langchain_core.messages import HumanMessage
 
 # logger
 logger = get_logger(__name__)
+
+# llm
+llm = get_model()
 
 
 # Image handling helper
@@ -34,10 +38,20 @@ def _get_image_description(image_b64: str, context: str = "") -> str:
         prompt = f"Context: {context}\n\n{prompt}"
        
     try:
-        llm = get_gemini()
-        # Gemini accept PIL image directly - no base64 encoding needed
-        pil_image = _base64_to_pil(image_b64)
-        response = llm.generate_content([prompt, pil_image])
+        message = HumanMessage(content=[
+            {
+                "type": "text",
+                "text": prompt
+            },
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/png;base64,{image_b64}",
+                    "detail": "high"
+                }
+            }
+        ])
+        response = llm.invoke([message])
         return response.text
     except Exception as e:
         logger.error(f"Gemini vision description failed: {e}")
