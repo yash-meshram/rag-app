@@ -1,15 +1,16 @@
+from pathlib import Path
 from langchain_core.documents import Document
-from logger_config import get_logger
+from app.logger_config import get_logger
 from typing import List
 import fitz
-from services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
+from app.rag.services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
 
 
 # logger
 logger = get_logger(__name__)
 
 
-# Loading and parsing PDF file
+# Loading and parsing PDF file (test+image)
 def load_pdf(file_path: str, user_id: str) -> List[Document]:
     """Load the pdf file and parse into pdf_data"""
     pdf_data: List[Document] = []
@@ -86,3 +87,20 @@ def load_pdf(file_path: str, user_id: str) -> List[Document]:
 
 
 # Loading and parsing excel file
+
+
+# Supported file format
+supported_extension = {
+    ".pdf": load_pdf
+}
+
+# load any document
+def load_document(file_path: str, user_id: str) -> List[Document]:
+    ext = Path(file_path).suffix.lower()
+    parser = supported_extension.get(ext)
+    
+    if parser is None:
+        logger.error(f"Unsupported file format '{ext}'")
+        raise ValueError(f"Unsupported file format '{ext}'")
+    
+    return parser(file_path = file_path, user_id = user_id)
