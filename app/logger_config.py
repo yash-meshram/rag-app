@@ -14,7 +14,7 @@ def get_logger(name: str = __name__):
 
         # Generate filename with today's date
         today_date = datetime.now().strftime("%Y-%m-%d")
-        log_file = f"logs/{today_date}.txt"
+        log_file = f"app/logs/{today_date}.txt"
 
         handler = RotatingFileHandler(
             log_file,
