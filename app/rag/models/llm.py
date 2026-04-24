@@ -1,18 +1,16 @@
-import google.generativeai as google_genai
+# from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 import os
 
 
 # LLM client
-_gemini_model = None
-def _get_gemini():
-    global _gemini_model
-    if _gemini_model is None:
-        google_genai.configure(api_key = os.getenv("GEMINI_API_KEY"))
-        _gemini_model = google_genai.GenerativeModel(
-            model_name = os.getenv("GEMINI_VISION_MODEL", "gemini-1.5-flash")
-        )
-    # logger.info("Gemini Vision model initialised")
-    return _gemini_model
+_model = None
+def _get_model():
+    global _model
+    if _model is None:
+        # _gemini_model = ChatGoogleGenerativeAI(model = os.getenv("GEMINI_VISION_MODEL"))
+        _model = ChatGroq(model = os.getenv("META_VISION_MODEL"), temperature = 0.2)
+    return _model
 
-def get_gemini():
-    return _get_gemini()
+def get_model():
+    return _get_model()
