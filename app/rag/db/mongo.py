@@ -1,16 +1,22 @@
 from pymongo import MongoClient
 import os
 from langchain_mongodb import MongoDBAtlasVectorSearch
-from services.embedding import embedding
+from app.rag.services.embedding import embedding
+import certifi
 
 cluster_uri = os.getenv("MONGODB_ATLAS_CLUSTER_URI")
 db_name = os.getenv("MONGODB_ATLAS_DB")
 collection_name = os.getenv("MONGODB_ATLAS_COLLECTION")
-index_name = os.getenv("MONGODB_ATLAS_INDEX")
+vector_search_index_name = os.getenv("VECTOR_SEARCH_INDEX_NAME")
+keyword_search_index_name = os.getenv("KEYWORD_SEARCH_INDEX_NAME")
 
-client = MongoClient(cluster_uri)
-mongodb_collection = client[db_name][collection_name]
-vector_search_index_name = "rag_app_id"
+client = MongoClient(
+    cluster_uri,
+    tls=True,
+    tlsCAFile = certifi.where()
+)
+mongodb_db = client[db_name]
+mongodb_collection = mongodb_db[collection_name]
 
 # vector store
 mongodb_vector_store = MongoDBAtlasVectorSearch(
