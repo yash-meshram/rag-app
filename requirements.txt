@@ -14,3 +14,6 @@ langchain-text-splitters
 langchain-google-genai
 langchain-mongodb
 langchain-huggingface
+google-generativeai
+python-multipart
+certifi
