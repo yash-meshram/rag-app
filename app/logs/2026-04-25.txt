@@ -1,0 +1,5 @@
+2026-04-25 22:43:19,719 - app.rag.services.process_documents - INFO - Graph Neural Networks and Representation.pdf loaded and parsed to 16 raw blocks
+2026-04-25 22:46:50,733 - app.rag.services.process_documents - INFO - Graph Neural Networks and Representation.pdf loaded and parsed to 16 raw blocks
+2026-04-25 22:49:17,692 - app.rag.services.process_documents - INFO - Object_Detection_with_Transformers_A_Review.pdf loaded and parsed to 54 raw blocks
+2026-04-25 22:54:58,838 - app.rag.services.process_documents - INFO - Object_Detection_with_Transformers_A_Review.pdf loaded and parsed to 54 raw blocks
+2026-04-25 22:59:34,984 - app.rag.services.process_documents - INFO - Object_Detection_with_Transformers_A_Review.pdf loaded and parsed to 54 raw blocks
