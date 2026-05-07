@@ -11,7 +11,7 @@ async def upload_file(file: UploadFile):
 
     user_id = create_user_id()
 
-    file_path = f"app/data/{file.filename}"
+    file_path = f"rag/data/{file.filename}"
 
     with open(file_path, "wb") as f:
         f.write(await file.read())
