@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-from app.rag.db.mongo import mongodb_collection, mongodb_vector_store, keyword_search_index_name
+from rag.db.mongo import mongodb_collection, mongodb_vector_store, keyword_search_index_name
 from pathlib import Path
 from sentence_transformers import CrossEncoder
 import os

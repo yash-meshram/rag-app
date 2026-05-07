@@ -1,6 +1,6 @@
 from langchain_core.documents import Document
-from app.rag.models.llm import get_model
-from app.rag.services.hybrid_search import hybrid_search, rerank
+from rag.models.llm import get_model
+from rag.services.hybrid_search import hybrid_search, rerank
 
 llm = get_model()
 
