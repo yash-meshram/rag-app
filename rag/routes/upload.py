@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile
-from app.rag.utils.user_manager import create_user_id
-from app.rag.services.ingestion import store_document
+from rag.utils.user_manager import create_user_id
+from rag.services.ingestion import store_document
 
 import os
 

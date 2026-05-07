@@ -1,6 +1,6 @@
-from app.rag.services.process_documents import load_document
-from app.rag.services.chunking import chunk_document
-from app.rag.db.mongo import mongodb_vector_store
+from rag.services.process_documents import load_document
+from rag.services.chunking import chunk_document
+from rag.db.mongo import mongodb_vector_store
 
 
 def store_document(file_path: str, user_id: str):

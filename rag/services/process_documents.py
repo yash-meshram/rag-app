@@ -1,9 +1,9 @@
 from pathlib import Path
 from langchain_core.documents import Document
-from app.logger_config import get_logger
+from rag.logger_config import get_logger
 from typing import List
 import fitz
-from app.rag.services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
+from rag.services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
 
 
 # logger
@@ -65,7 +65,7 @@ def load_pdf(file_path: str, user_id: str) -> List[Document]:
                         "source_file": source_file,
                         "page_number": page_num,
                         "content_type": "image",
-                        "image_data": image_b64,
+                        "image_data": image_bytes,
                         "image_index": image_index,
                         "image_ext": image_ext,
                         "image_width": pil_image.width,
