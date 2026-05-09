@@ -1,0 +1,11 @@
+# RAG Streamlit Frontend Dependencies
+
+# Web framework for building the user interface
+streamlit>=1.28.0
+
+# HTTP client library for API communication with backend
+requests>=2.31.0
+
+# Python Imaging Library for image handling
+# Used for displaying base64-encoded images
+Pillow>=10.0.0

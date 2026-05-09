@@ -65,7 +65,7 @@ def load_pdf(file_path: str, user_id: str) -> List[Document]:
                         "source_file": source_file,
                         "page_number": page_num,
                         "content_type": "image",
-                        "image_data": image_bytes,
+                        "image_data": image_b64,
                         "image_index": image_index,
                         "image_ext": image_ext,
                         "image_width": pil_image.width,
