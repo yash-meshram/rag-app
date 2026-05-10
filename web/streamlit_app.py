@@ -1,114 +1,84 @@
-import streamlit as st
-import os
-import requests
-import base64
-from PIL import Image
-import io
-# from fastapi import UploadFile
+"""
+RAG Streamlit Application - Main Entry Point
 
-# Helper
-api_base_url = os.getenv("API_BASE_URL", "http://localhost:8000")
+This is the main entry point for the Streamlit web application.
+It configures the page settings and renders the UI components.
 
-def api_query(query: str, user_id: str = "", file_name: str = ""):
-    response: dict = requests.post(
-        f"{api_base_url}/query",
-        json = {
-            "question": query,
-            "user_id": user_id,
-            "file_name": file_name
-        }
-    )
-    response.raise_for_status()
-    return response.json()
+To run this application:
+    streamlit run web/streamlit_app.py
 
-def api_upload(file):
-    response: dict = requests.post(
-        f"{api_base_url}/upload",
-        files={
-            "file": (file.name, file, file.type)
-        }
-    )
-    response.raise_for_status()
-    return response.json()['user_id']
+For development, you can also run directly from the web directory:
+    cd web && streamlit run streamlit_app.py
+"""
 
-# Page config
+# =============================================================================
+# STANDARD LIBRARY IMPORTS
+# =============================================================================
+import streamlit as st  # Streamlit library for building web UI
+
+# =============================================================================
+# LOCAL IMPORTS
+# =============================================================================
+# Import the render_app function from our app package
+# This function orchestrates all UI component rendering
+from app import render_app
+
+# =============================================================================
+# PAGE CONFIGURATION
+# =============================================================================
+
+# Configure the Streamlit page settings
+# This must be the first Streamlit command in the script
 st.set_page_config(
-    page_title = "RAG-app",
-    initial_sidebar_state = "expanded",
-    layout = "wide"
+    page_title="RAG-app",  # Title shown in browser tab/window
+    initial_sidebar_state="expanded",  # Sidebar starts expanded
+    layout="wide"  # Use wide layout for more horizontal space
 )
 
+# =============================================================================
+# RENDER THE APPLICATION UI
+# =============================================================================
 
-# Sidebar for file upload
-st.sidebar.title("+ Upload Document")
+# Call the main render function to display all UI components
+# This handles file upload, chat input, and response display
+render_app()
 
-uploaded_file = st.sidebar.file_uploader(
-    "Upload PDF",
-    type=["pdf"]
-)
+# =============================================================================
+# NOTES FOR DEVELOPERS
+# =============================================================================
 
-# file uploaded
-if "file_upload_status" not in st.session_state:
-    st.session_state.file_upload_status = "idle"
-if "file_name" not in st.session_state:
-    st.session_state.file_name = ""
-if "user_id" not in st.session_state:
-    st.session_state.user_id = ""
-    
-if uploaded_file and st.session_state.file_upload_status == "idle":
-    st.session_state.file_upload_status = "uploading"
-    st.session_state.file_name = str(uploaded_file.name)
-    
-    with st.sidebar:
-        with st.spinner("Uploading file"):
-            user_id = api_upload(file = uploaded_file)
-        
-            if user_id:
-                st.session_state.file_upload_status = "done"
-                st.session_state.user_id = user_id
-            else:
-                st.session_state.file_upload_status = "idle"
-                st.error("Failed to upload file.")
-
-
-# pending calls
-if "pending_query" not in st.session_state:
-    st.session_state.pending_query = None
-
-# chat input
-user_query = st.text_input("Type your query...")
-
-if user_query:
-    if st.session_state.file_upload_status == "idle" :
-        response = api_query(query = user_query)
-        st.write(response["response"])        
-    else:
-        st.session_state.pending_query = user_query
-        
-# display image
-def display_base64_image(image_b64_string):
-    # Decode base64 string
-    image_bytes = base64.b64decode(image_b64_string)
-    
-    # Convert to image
-    image = Image.open(io.BytesIO(image_bytes))
-    
-    st.image(image, use_column_width = True)
-        
-# excuting pending call
-if st.session_state.file_upload_status == "done" and st.session_state.pending_query is not None:
-    query = st.session_state.pending_query
-    user_id = st.session_state.user_id
-    file_name = st.session_state.file_name
-    response = api_query(
-        query = query,
-        user_id = user_id,
-        file_name = file_name
-    )
-    st.write(response["response"])
-    
-    for image_base64_str in response["images"]:
-        display_base64_image(image_base64_str)
-    
-    # clear session
-    st.session_state.pending_query = None
+# The app flow works as follows:
+#
+# 1. User opens the app -> render_app() is called
+# 2. Session state is initialized (state.py)
+# 3. Title "RAG Chat" is displayed
+# 4. File upload widget appears in sidebar (ui.py)
+# 5. Chat history is displayed (existing messages)
+# 6. Chat input appears at the bottom of the page
+#
+# User interaction flows:
+#
+# A. Query without document:
+#    - User types query in chat input
+#    - Message added to chat history as "user"
+#    - api.api_query() is called with empty user_id/file_name
+#    - Response added to chat history as "assistant"
+#
+# B. Upload first, then query:
+#    - User uploads PDF via sidebar
+#    - api.api_upload() is called, returns user_id
+#    - User types query in chat input
+#    - api.api_query() is called with user_id and file_name
+#    - Response and images added to chat history
+#
+# C. Query first, then upload:
+#    - User types query before upload completes
+#    - Query is stored as pending_query
+#    - User uploads file
+#    - After upload completes, pending_query is executed
+#    - Response and images added to chat history
+#
+# Chat History Features:
+# - All messages are persisted in session state
+# - User can clear chat history via sidebar button
+# - Images returned by the API are displayed inline with responses
