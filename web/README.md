@@ -1,13 +1,13 @@
 # Web Frontend (`web`)
 
-Streamlit UI for the RAG (Retrieval-Augmented Generation) application.
+Streamlit UI for interacting with the RAG backend.
 
 ## Features
 
 - Upload PDF documents to the backend for processing
 - Query the RAG system with questions
 - View generated text responses
-- Display AI-generated images (base64 format)
+- Display retrieved images (base64 format)
 
 ## Project Structure
 
@@ -51,7 +51,7 @@ Renders all UI components:
 
 ## Environment Variables
 
-Set in `.env` (project root):
+Set for the Streamlit process environment:
 
 ```env
 API_BASE_URL=http://localhost:8000
@@ -88,25 +88,24 @@ streamlit run streamlit_app.py
 
 ### Flow 1: Query Without Document
 1. User types query in text field
-2. App calls `POST /query` with `user_id=""` and `file_name=""`
+2. App calls `POST /query` with `question`, and empty-string values for `user_id`/`file_name`
 3. Backend returns generic response
 4. Response text is displayed
 
 ### Flow 2: Upload Then Query
 1. User uploads PDF via sidebar
 2. App calls `POST /upload` with file
-3. Backend returns `user_id`
+3. Backend returns `user_id`; frontend stores `user_id` and uploaded `file_name`
 4. User types query
 5. App calls `POST /query` with `user_id` and `file_name`
 6. Backend returns contextual response + images
 7. Response text and images are displayed
 
-### Flow 3: Query Before Upload Completes
-1. User types query (file upload pending)
-2. Query is stored as `pending_query`
-3. User uploads PDF
-4. After upload completes, pending query is executed
-5. Response is displayed
+## Backend Contract Expectations
+
+- `POST /upload` must return JSON containing `user_id`.
+- `POST /query` must return JSON containing `response` and optionally `images`.
+- `images` should be a list of base64-encoded image strings.
 
 ## Dependencies
 
