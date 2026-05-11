@@ -1,8 +1,9 @@
 from dotenv import load_dotenv
-from rag.routes import query, upload
-from fastapi import FastAPI
-
 load_dotenv()
+
+from app import query
+from app import upload
+from fastapi import FastAPI
 
 app = FastAPI()
 

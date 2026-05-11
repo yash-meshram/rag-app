@@ -1,0 +1,15 @@
+2026-05-11 01:56:14,812 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:02:23,541 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:02:38,079 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:02:52,579 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:04:15,743 - rag.services.process_documents - INFO - Graph Neural Networks and Representation.pdf loaded and parsed to 16 raw blocks
+2026-05-11 02:09:45,482 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:11:57,390 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:19:54,403 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:28:26,101 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:31:58,163 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 02:35:34,152 - rag.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 14:31:00,075 - app.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks
+2026-05-11 14:35:53,379 - app.services.process_documents - INFO - Graph Neural Networks and Representation.pdf loaded and parsed to 16 raw blocks
+2026-05-11 15:32:28,406 - app.services.process_documents - INFO - Object_Detection_with_Transformers_A_Review.pdf loaded and parsed to 54 raw blocks
+2026-05-11 15:36:34,731 - app.services.process_documents - INFO - Attention is all you need.pdf loaded and parsed to 18 raw blocks

@@ -1,7 +1,7 @@
 from fastapi import APIRouter
-from rag.services.retrieval import retrieve_docs
-from rag.models.llm import get_model
-from rag.schemas.request import QuestionRequest
+from app.services.retrieval import retrieve_docs
+from app.models.llm import get_model
+from app.schemas.request import QuestionRequest
 
 router = APIRouter()
 llm = get_model()

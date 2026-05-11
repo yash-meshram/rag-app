@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import os
 from langchain_mongodb import MongoDBAtlasVectorSearch
-from rag.services.embedding import embedding
+from app.services.embedding import embedding
 import certifi
 
 cluster_uri = os.getenv("MONGODB_ATLAS_CLUSTER_URI")

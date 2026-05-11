@@ -1,9 +1,9 @@
 from pathlib import Path
 from langchain_core.documents import Document
-from rag.logger_config import get_logger
+from logger_config import get_logger
 from typing import List
 import fitz
-from rag.services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
+from app.services.image_handler import bytes_to_pil, pil_to_base64, get_image_description
 
 
 # logger

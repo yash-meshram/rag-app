@@ -1,8 +1,8 @@
 from PIL import Image
 import io
 import base64
-from rag.models.llm import get_model
-from rag.logger_config import get_logger
+from app.models.llm import get_model
+from logger_config import get_logger
 from langchain_core.messages import HumanMessage
 
 # logger

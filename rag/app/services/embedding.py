@@ -2,7 +2,7 @@
 import os
 from langchain_huggingface import HuggingFaceEmbeddings
 
-# embeding_model = os.getenv("EMBEDDING_MODEL")
+# huggingface_embeding_model = "sentence-transformers/all-MiniLM-L6-v2"
 huggingface_embeding_model = os.getenv("HUGGINGFACE_EMBEDDING_MODEL")
 
 embedding = HuggingFaceEmbeddings(model_name = huggingface_embeding_model)

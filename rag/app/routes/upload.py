@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile
-from rag.utils.user_manager import create_user_id
-from rag.services.ingestion import store_document
+from app.utils.user_manager import create_user_id
+from app.services.ingestion import store_document
 
 import os
 
@@ -11,7 +11,7 @@ async def upload_file(file: UploadFile):
 
     user_id = create_user_id()
 
-    file_path = f"rag/data/{file.filename}"
+    file_path = f"app/data/{file.filename}"
 
     with open(file_path, "wb") as f:
         f.write(await file.read())
