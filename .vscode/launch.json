@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "rag.main:app",
+                "app.main:app",
                 "--reload"
             ],
             "jinja": true
