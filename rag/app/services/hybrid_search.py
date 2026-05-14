@@ -1,11 +1,11 @@
+from config import settings
 from langchain_core.documents import Document
 from app.db.mongo import mongodb_collection, mongodb_vector_store, keyword_search_index_name
 from pathlib import Path
 from sentence_transformers import CrossEncoder
-import os
 
-reranker_model = os.getenv("RERANKER_MODEL")
 
+reranker_model = settings.RERANKER_MODEL
 reranker = CrossEncoder(reranker_model)
 
 
@@ -70,6 +70,7 @@ def hybrid_search(
     # retrieved_docs = keyword_retrieved_docs
     
     return retrieved_docs
+
 
 def rerank(query: str, docs: list[Document], top_k: int = 5):
     pairs = [(query, doc.page_content) for doc in docs]

@@ -1,6 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 from app import query
 from app import upload
 from fastapi import FastAPI
