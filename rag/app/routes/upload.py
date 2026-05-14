@@ -1,7 +1,6 @@
 from fastapi import APIRouter, UploadFile
 from app.utils.user_manager import create_user_id
 from app.services.ingestion import store_document
-
 import os
 
 router = APIRouter()

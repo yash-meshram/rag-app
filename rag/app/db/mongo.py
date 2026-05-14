@@ -1,14 +1,14 @@
+from config import settings
 from pymongo import MongoClient
-import os
 from langchain_mongodb import MongoDBAtlasVectorSearch
 from app.services.embedding import embedding
 import certifi
 
-cluster_uri = os.getenv("MONGODB_ATLAS_CLUSTER_URI")
-db_name = os.getenv("MONGODB_ATLAS_DB")
-collection_name = os.getenv("MONGODB_ATLAS_COLLECTION")
-vector_search_index_name = os.getenv("VECTOR_SEARCH_INDEX_NAME")
-keyword_search_index_name = os.getenv("KEYWORD_SEARCH_INDEX_NAME")
+cluster_uri = settings.MONGODB_ATLAS_CLUSTER_URI
+db_name = settings.MONGODB_ATLAS_DB
+collection_name = settings.MONGODB_ATLAS_COLLECTION
+vector_search_index_name = settings.VECTOR_SEARCH_INDEX_NAME
+keyword_search_index_name = settings.KEYWORD_SEARCH_INDEX_NAME
 
 client = MongoClient(
     cluster_uri,
