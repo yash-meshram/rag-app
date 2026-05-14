@@ -38,6 +38,9 @@ The app runs as two services:
 - `web/app/` - UI, state management, backend API client config
 - `requirements.txt` - root Python dependencies
 
+## Poject Architecture
+![Architecture Diagram](images/Architecture%20Diagram.png)
+
 ## Prerequisites
 
 - Python 3.10+
@@ -160,6 +163,9 @@ Open the Streamlit URL shown in terminal (usually `http://localhost:8501`).
 3. Receive and store `user_id` + `file_name`.
 4. Ask questions in chat.
 5. Backend retrieves relevant chunks, reranks, and returns answer + images.
+
+## Sequential Diagram
+![Sequential Diagram](images/Sequential%20Diagram.png)
 
 ## Troubleshooting
 
